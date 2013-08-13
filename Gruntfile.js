@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       src: {
-        src: ['radar.js', 'util.js']
+        src: ['scripts/*.js']
       }
     },
     connect: {
@@ -81,7 +81,6 @@ module.exports = function(grunt) {
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-  // grunt.registerTask('default', ['bower', 'jshint', 'concat', 'uglify']);  
-  grunt.registerTask('default', ['bower', 'concat', 'uglify']);
+  grunt.registerTask('default', ['bower', 'jshint', 'concat', 'uglify']);
 
 };
