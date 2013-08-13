@@ -1,5 +1,5 @@
 //This is the title for your window tab, and your Radar
-document.title = "Stephen's Technology Radar";
+document.title = "Technology Radar";
 
 
 //This is the concentic circles that want on your radar
@@ -54,7 +54,7 @@ var radar_data = [
         "top" : 18,
         "color" : "#8FA227",
         "items" : [ 
-            {"name":"Database based Integration", "pc":{"r":350,"t":135},"movement":"t", "blipSize":700},
+            {"name":"Database based Integration", "pc":{"r":350,"t":135},"movement":"t"},
             {"name":"Scrum certification", "pc":{"r":350,"t":95},"movement":"c", "url":"http://www.google.com"},
             {"name":"Incremental data warehousing", "pc":{"r":250,"t":165},"movement":"c"},    
             {"name":"DevOps", "pc":{"r":250,"t":110},"movement":"c"},    

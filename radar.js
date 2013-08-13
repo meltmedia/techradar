@@ -1,91 +1,231 @@
-function init(h,w) {
-  $('#title').text(document.title);  
-	   
- var radar = new pv.Panel()
-      .width(w)
-      .height(h)
-      .canvas('radar')
+/*global $:false,global radar_arcs:false,global d3:false*/
 
-// arcs
-radar.add(pv.Dot)
-       .data(radar_arcs)
-       .left(w/2)
-       .bottom(h/2)
-       .radius(function(d){return d.r;})
-       .strokeStyle("#ccc")
-       .anchor("top")       
-       .add(pv.Label).text(function(d) { return d.name;});
+function displayArcs(radar, w, h) {
+  var archLabelPadding = 5;
 
-//quadrant lines -- vertical
-radar.add(pv.Line)
-        .data([(h/2-radar_arcs[radar_arcs.length-1].r),h-(h/2-radar_arcs[radar_arcs.length-1].r)])
-        .lineWidth(1)
-        .left(w/2)        
-        .bottom(function(d) {return d;})       
-        .strokeStyle("#bbb");
+  var arcs = radar.append("g")
+    .attr("class", "arcs")
+    .selectAll("circle")
+    .data(radar_arcs)
+    .enter()
+    .append("g")
+    .attr("transform", function(d) {
+         d.x = w/2;
+         d.y = h/2;
+         return "translate(" + d.x + "," + d.y + ")"; 
+       });
 
-//quadrant lines -- horizontal 
-radar.add(pv.Line)
-        .data([(w/2-radar_arcs[radar_arcs.length-1].r),w-(w/2-radar_arcs[radar_arcs.length-1].r)])
-        .lineWidth(1)
-        .bottom(h/2)
-        .left(function(d) {return d;})       
-        .strokeStyle("#bbb");
+  arcs.append("circle")  
+    .attr("class", "arc")
+    .attr("r", function(d) {
+        return d.r;
+    })
+   .attr("fill", "none")
+   .attr("stroke", "gray")
+   .attr("stroke-width", 1);  
 
-
-// blips
-var total_index=1;
-for (var i = 0; i < radar_data.length; i++) {
-    radar.add(pv.Dot)       
-    .def("active", false)
-    .data(radar_data[i].items)
-    .size( function(d) { return ( d.blipSize !== undefined ? d.blipSize : 70 ); })
-    .left(function(d) { var x = polar_to_raster(d.pc.r, d.pc.t)[0];
-                        console.log("name:" + d.name + ", x:" + x); 
-                        return x;})
-    .bottom(function(d) { var y = polar_to_raster(d.pc.r, d.pc.t)[1];                                 
-                          console.log("name:" + d.name + ", y:" + y); 
-                          return y;})
-    .title(function(d) { return d.name;})		 
-    .cursor( function(d) { return ( d.url !== undefined ? "pointer" : "auto" ); })                                                            
-    .event("click", function(d) { if ( d.url !== undefined ){self.location =  d.url}}) 
-    .angle(45)
-    .strokeStyle(radar_data[i].color)
-    .fillStyle(radar_data[i].color)
-    .shape(function(d) {return (d.movement === 't' ? "triangle" : "circle");})         
-    .anchor("center")
-        .add(pv.Label)
-        .text(function(d) {return total_index++;}) 
-        .textBaseline("middle")
-        .textStyle("white");            
+  arcs.append("text")
+    .attr("text-anchor", "middle")
+    .attr("y", function(d) {
+      return -d.r - archLabelPadding;
+    })
+    .text(function(d) {
+      return d.name;
+    })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "11px");  
 }
 
+function init(h,w) {
+  $('#title').text(document.title);  
 
-//Quadrant Ledgends
-var radar_quadrant_ctr=1;
-for (var i = 0; i < radar_data.length; i++) {        
-    radar.add(pv.Label)         
-         .left( radar_data[i].left )         
-         .top( radar_data[i].top )  
-         .text(  radar_data[i].quadrant )		 
-         .strokeStyle( radar_data[i].color )
-         .fillStyle( radar_data[i].color )                    
-         .font("18px sans-serif")
-            .add( pv.Dot )            
-            .def("i", radar_data[i].top )
-            .data(radar_data[i].items)            
-            .top( function() { return ( this.i() + 18 + this.index * 18 );} )   
-            .shape( function(d) {return (d.movement === 't' ? "triangle" : "circle");})                 
-            .cursor( function(d) { return ( d.url !== undefined ? "pointer" : "auto" ); })                                                            
-            .event("click", function(d) { if ( d.url !== undefined ){self.location =  d.url}}) 
-            .size(10) 
-            .angle(45)            
-            .anchor("right")                
-                .add(pv.Label)                
-                .text(function(d) {return radar_quadrant_ctr++ + ". " + d.name;} );
-}      
-       
- radar.anchor('radar');
- radar.render();
-     
-  };
+  var blipLabelPadding = 5;
+
+  var globalIndex = 1;  // Start with one so the display is 1 based
+  var maxRadius = 0;
+
+for (var arcIndex in radar_arcs) {
+  maxRadius = Math.max(maxRadius, radar_arcs[arcIndex].r);
+}
+
+// Compute the global index on all the entries
+// this mutates the data
+for (var quad in radar_data) {
+  for (var item in radar_data[quad].items) {
+    radar_data[quad].items[item].globalIndex = globalIndex++;
+  }
+}
+
+var radar = d3.select("body")
+  .append("svg")
+  .attr("width", w)
+  .attr("height", h);
+
+// Draw the radar arcs
+displayArcs(radar, w, h); 
+
+// Draw the axis
+radar.append("g")
+  .append("line")
+  .attr("stroke", "gray")
+  .attr("stroke-width", 1)
+  .attr("x1", (w/2)-maxRadius)
+  .attr("y1", h/2)
+  .attr("x2", (w/2)+maxRadius)
+  .attr("y2", h/2);
+
+radar.append("g")
+  .append("line")
+  .attr("stroke", "gray")
+  .attr("stroke-width", 1)
+  .attr("x1", w/2)
+  .attr("y1", (h/2)-maxRadius)
+  .attr("x2", w/2)
+  .attr("y2", (h/2)+maxRadius);  
+
+// Draw the blips
+var techs = radar.append("g")
+  .attr("class", "radar blips")  
+  .selectAll("g")
+  .data(radar_data)
+  .enter()
+  .append("g")
+  .text(function(d, i) {
+    return d.quadrant;
+  });
+
+var blips = techs.append("g")
+  .selectAll("g")
+  .data(function(d) {
+    return d.items;
+  })    
+  .enter()
+  .append("g")
+  .attr("class", "blips")  
+  .attr("transform", function(d) {
+      var polar = polar_to_raster(d.pc.r, d.pc.t);
+
+      d.x = polar[0];
+      d.y = h-polar[1];
+      return "translate(" + d.x + "," + d.y + ")"; 
+    });  
+
+// The symbol for the blip
+blips.append("path")  
+  .attr("class", "blip")
+  .attr("d", function(d,i) {
+    var movement = d3.select(this.parentNode).datum().movement;
+
+    var type = "circle";
+
+    if (movement === "c") {
+      type = "circle";
+    } else if (movement === "t") {
+      type = "triangle-up";
+    }
+
+    return d3.svg.symbol().type(type).size(d3.select(this.parentNode).datum().blipSize || 90)();
+   }) 
+  .attr("fill", function(d) {
+    return d3.select(this.parentNode.parentNode).datum().color;  
+   })
+  .attr("stroke", "gray")
+  .attr("stroke-width", 1);  
+
+// The index for the blip
+blips.append("text")
+  .attr("text-anchor", "middle")
+  .attr("y", function(d) {
+    return -blipLabelPadding;
+  })
+  .text(function(d) {    
+    return d.globalIndex;
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "11px");     
+
+// Draw the legend
+var legend = radar.append("g")
+  .attr("class", "radar legends")  
+  .selectAll("g")
+  .data(radar_data)
+  .enter()
+  .append("g")
+  .text(function(d, i) {
+    return d.quadrant;
+  })
+  .attr("transform", function(d, i) {
+      d.x = d.left;
+      d.y = d.top;
+      return "translate(" + d.x + "," + d.y + ")"; 
+    });    
+
+// Header for each category
+legend.append("text")
+  .attr("text-anchor", "left")
+  .attr("y", 4)  
+  .text(function(d) {    
+    return d.quadrant;
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "18px");     
+
+// Group all the legend entries together
+var entry = legend.append("g")
+  .selectAll("g")
+  .data(function(d) {
+    return d.items;
+  })    
+  .enter()
+  .append("g")
+  .attr("class", "blips")  
+  .attr("transform", function(d, i) {
+      d.x = 0;
+      d.y = 18 + i*18;
+      return "translate(" + d.x + "," + d.y + ")"; 
+    });  
+
+// For each entry add a symbol to represent the change or lack there of
+entry.append("path")  
+  .attr("class", "blip")
+  .attr("d", function(d,i) {
+    var movement = d3.select(this.parentNode).datum().movement;
+
+    var type = "circle";
+
+    if (movement === "c") {
+      type = "circle";
+    } else if (movement === "t") {
+      type = "triangle-up";
+    }
+
+    return d3.svg.symbol().type(type)();
+   }) 
+  .attr("fill", function(d) {
+    return d3.select(this.parentNode.parentNode).datum().color;  
+   })
+  .attr("stroke", "gray")
+  .attr("stroke-width", 1);  
+
+// The index as seen on the radar
+entry.append("text")
+  .attr("text-anchor", "left")
+  .attr("x", 10)  
+  .attr("y", 4)  
+  .text(function(d) {    
+    return d.globalIndex;
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "11px");   
+
+// The name of the entry
+entry.append("text")
+  .attr("text-anchor", "left")
+  .attr("x", 26)
+  .attr("y", 4)  
+  .text(function(d) {    
+    return d.name;
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "11px");     
+}
