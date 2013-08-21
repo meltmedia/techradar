@@ -16,25 +16,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    // Task configuration.
-    concat: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: ['radar.js'],
-        dest: 'dist/<%= pkg.name %>.js'
-      }
-    },
-    uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: '<%= distdir %>/<%= pkg.name %>.js'
-      }
-    },
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -53,9 +34,9 @@ module.exports = function(grunt) {
           base: '.'
         }
       }
-    },    
-    qunit: {
-      files: ['test/**/*.html']
+    },
+    mocha: {
+      index: [ 'test/runner/index.html' ]
     },
     watch: {
       gruntfile: {
@@ -70,17 +51,17 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
+  grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-bower-task');
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-  grunt.registerTask('default', ['bower', 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['bower', 'jshint']);
+
+  grunt.registerTask('test', ['bower', 'mocha']);
 
 };
