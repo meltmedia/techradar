@@ -1,8 +1,5 @@
 /* global requirejs, require */
-requirejs.config({
-    
-  baseUrl: "/test/",
-  
+requirejs.config({  
   paths: {
     "utils": "../scripts/utils",
     "mocha": "../lib/mocha/mocha"
@@ -10,7 +7,6 @@ requirejs.config({
 });
 
 (function() {
-
   // test mode -- 'tdd', 'bdd-should', or 'bdd-expect'
   var mode = 'bdd-expect';
 
@@ -26,10 +22,7 @@ requirejs.config({
     window.expect = chai.expect;
   }
 
-  mocha.setup({
-    ui: mode.split('-')[0],
-    globals: [ 'XMLHttpRequest' ]
-  });
+  mocha.setup('bdd');
 
   require( [ 'list_of_tests' ], function( lot ) {
     require( lot, function() {
