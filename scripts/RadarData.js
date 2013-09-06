@@ -82,7 +82,8 @@ define(function() {
                     createItem('TDD', 90, 120, 't'),
                     createItem('Responsive Design', 30, 140, 't'),
                     createItem('Continuous Integration', 70, 140, 't'),
-                    createItem('Version control systems', 20, 160, 't')
+                    createItem('Version control systems', 20, 160, 't'),
+                    createItem('Health checks', 90, 160, 't')
                 ]
             },
             { "quadrant": "Tools",
@@ -95,21 +96,30 @@ define(function() {
 
                     // [Hold]
                     createItem('Ant', 340, 45, 't'),
+                    createItem('Zookeeper', 340, 80, 't'),
+                    createItem('ActiveMQ', 350, 60, 't'),
                     // [Assess]
-                    createItem('Gradle', 280, 70, 't'),
+                    createItem('Gradle', 270, 70, 't'),
+                    createItem('RabbitMQ', 280, 45, 't'),
+                    createItem('Collected', 250, 60, 't'),
+                    createItem('statsd', 250, 30, 't'),
                     // [Trial]
                     createItem('Docker', 120, 20, 't'),
+                    createItem('graphite', 120, 70, 't'),
+                    createItem('MongoDB', 120, 50, 't'),
                     // [Adopt]
                     createItem('Require.js', 60, 10, 't'),
                     createItem('Bower', 70, 20, 't'),
-                    createItem('Grunt', 60, 30, 't'),
+                    createItem('Grunt', 30, 30, 't'),
                     createItem('Maven', 55, 40, 't'),
                     createItem('Chef', 90, 50, 't'),
                     createItem('Vagrant', 60, 60, 't'),
-                    createItem('GitHub', 40, 70, 't')
+                    createItem('GitHub', 40, 70, 't'),
+                    createItem('nagios', 80, 80, 't'),
+                    createItem('MySQL', 80, 50, 't')                    
                 ]
             },
-            { "quadrant": "Platforms",
+            { "quadrant": "Platforms & Frameworks",
                 "left" :45,
                  "top" : (1200/2 + 18),
                 "color" : "#DC6F1D",
@@ -120,16 +130,23 @@ define(function() {
                     createItem('OSGi', 350, 190, 't'),
                     createItem('Sling', 390, 225, 't'),
                     createItem('JBoss', 320, 260, 't'),
+                    createItem('Servicemix', 370, 240, 't'),
+                    createItem('J2EE', 350, 210, 't'),                    
                     // [Assess]
+                    createItem('Dropwizard', 280, 195, 't'),
+                    createItem('Grails', 250, 240, 't'),                    
                     // [Trial]
-                    createItem('MongoDB', 220, 220, 't'),
+
+                    createItem('Drupal', 120, 200, 't'),
+                    createItem('Angular.js', 110, 230, 't'),                    
                     // [Adopt]
                     createItem('Cadmium', 70, 190,'t'),
                     createItem('Amazon AWS', 50, 220, 't'),
-                    createItem('MySQL', 80, 260, 't')
+                    createItem('Twitter Bootstrap', 60, 260, 't'),                    
+
                 ]
             },
-            { "quadrant": "Languages",
+            { "quadrant": "Languages & Frameworks",
                 "color" : "#B70062",
                 "left"  : (1160-100+30),
                 "top" :   (1200/2 + 18),
@@ -138,25 +155,19 @@ define(function() {
 
 
                     // [Hold]
-                    createItem('J2EE', 350, 280, 't'),
                     createItem('Flash', 340, 300, 't'),
                     createItem('Flex', 380, 320, 't'),
                     createItem('Dart', 310, 340, 't'),
                     // [Assess]
-                    createItem('Dropwizard', 280, 285, 't'),
                     createItem('Ruby', 250, 305, 't'),
                     createItem('Go', 290, 315, 't'),
                     createItem('Clojure', 290, 350, 't'),
-                    createItem('Grails', 250, 330, 't'),
                     // [Trial]
                     createItem('PHP', 120, 290, 't'),
-                    createItem('Drupal', 120, 310, 't'),
-                    createItem('Angular.js', 110, 330, 't'),
                     createItem('Groovy', 110, 350, 't'),
                     createItem('Python', 140, 320, 't'),
                     // [Adopt]
-                    createItem('Require.js', 50, 280, 't'),
-                    createItem('Twitter Bootstrap', 60, 300, 't'),
+                    
                     createItem('HTML 5', 40, 320, 't'),
                     createItem('Docpad', 70, 320, 't'),
                     createItem('Javascript', 40, 300, 't'),
