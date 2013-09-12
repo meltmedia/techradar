@@ -13,6 +13,6 @@ requirejs.config({
   }  
 });
 
-require(['radar', 'radarData'], function(radar, radarData){
+require(['radar', 'RadarData'], function(radar, radarData){
   radar.init(radarData);
 });
