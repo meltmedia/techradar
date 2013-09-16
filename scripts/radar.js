@@ -40,7 +40,8 @@
   function init(radarData) {
     // $('#title').text(radarData.title);  
 
-    var blipLabelPadding = 5;
+    var blipLabelPadding = 8;
+    var defaultBlipSize = 300;
 
     var globalIndex = 1;  // Start with one so the display is 1 based
     var maxRadius = 0;
@@ -125,7 +126,7 @@
           type = "triangle-up";
         }
 
-        return d3.svg.symbol().type(type).size(d3.select(this.parentNode).datum().blipSize || 90)();
+        return d3.svg.symbol().type(type).size(d3.select(this.parentNode).datum().blipSize || defaultBlipSize)();
        }) 
       .attr("fill", function() {
         return d3.select(this.parentNode.parentNode).datum().color;  
@@ -137,11 +138,12 @@
     blips.append("text")
       .attr("text-anchor", "middle")
       .attr("y", function() {
-        return -blipLabelPadding;
+        return blipLabelPadding;
       })
       .text(function(d) {    
         return d.globalIndex;
       })
+      .attr("fill", "white")    
       .attr("font-family", "sans-serif")
       .attr("font-size", "11px");     
 
