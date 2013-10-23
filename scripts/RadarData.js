@@ -70,20 +70,20 @@ define(function() {
                     // [Assess]
                     createItem('Performance testing', 230, 100, 't'),
                     createItem('Load testing', 280, 120, 't'),
-                    createItem('Integration Testing', 210, 140, 't'),
-                    createItem('Self executable app containers', 215, 160, 't'),
+                    createItem('Integration Testing', 220, 140, 't'),
+                    createItem('Self executable app containers', 220, 160, 't'),
                     // [Trial]
-                    createItem('System Testing', 110, 100, 't'),
-                    createItem('Continuous Delivery', 110, 120, 't'),
+                    createItem('System Testing', 120, 105, 't'),
+                    createItem('Continuous Delivery', 120, 120, 't'),
                     createItem('Smoke Tests', 140, 140, 't'),
                     createItem('Mobile Web Apps', 160, 160, 't'),
                     // [Adopt]
-                    createItem('Unit Testing', 50, 100, 't'),
-                    createItem('TDD', 90, 120, 't'),
-                    createItem('Responsive Design', 30, 140, 't'),
+                    createItem('Unit Testing', 50, 110, 't'),
+                    createItem('TDD', 80, 110, 't'),
+                    createItem('Responsive Design', 50, 160, 't'),
                     createItem('Continuous Integration', 70, 140, 't'),
-                    createItem('Version control systems', 20, 160, 't'),
-                    createItem('Health checks', 90, 160, 't')
+                    createItem('Version control systems', 25, 135, 't'),
+                    createItem('Health checks', 85, 160, 't')
                 ]
             },
             { "quadrant": "Tools",
@@ -108,11 +108,11 @@ define(function() {
                     createItem('graphite', 120, 70, 't'),
                     createItem('MongoDB', 120, 50, 't'),
                     // [Adopt]
-                    createItem('Require.js', 60, 10, 't'),
-                    createItem('Bower', 70, 20, 't'),
+                    createItem('Require.js', 60, 15, 't'),
+                    createItem('Bower', 85, 15, 't'),
                     createItem('Grunt', 30, 30, 't'),
                     createItem('Maven', 55, 40, 't'),
-                    createItem('Chef', 90, 50, 't'),
+                    createItem('Chef', 90, 30, 't'),
                     createItem('Vagrant', 60, 60, 't'),
                     createItem('GitHub', 40, 70, 't'),
                     createItem('nagios', 80, 80, 't'),
@@ -128,21 +128,21 @@ define(function() {
 
                     // [Hold]
                     createItem('OSGi', 350, 190, 't'),
-                    createItem('Sling', 390, 225, 't'),
+                    createItem('Sling', 380, 225, 't'),
                     createItem('JBoss', 320, 260, 't'),
                     createItem('Servicemix', 370, 240, 't'),
                     createItem('J2EE', 350, 210, 't'),                    
                     // [Assess]
                     createItem('Dropwizard', 280, 195, 't'),
-                    createItem('Grails', 250, 240, 't'),                    
+                    createItem('Grails', 230, 240, 't'),                    
                     // [Trial]
 
                     createItem('Drupal', 120, 200, 't'),
-                    createItem('Angular.js', 110, 230, 't'),                    
+                    createItem('Angular.js', 115, 230, 't'),                    
                     // [Adopt]
                     createItem('Cadmium', 70, 190,'t'),
                     createItem('Amazon AWS', 50, 220, 't'),
-                    createItem('Twitter Bootstrap', 60, 260, 't'),                    
+                    createItem('Twitter Bootstrap', 60, 255, 't'),                    
 
                 ]
             },
@@ -157,23 +157,23 @@ define(function() {
                     // [Hold]
                     createItem('Flash', 340, 300, 't'),
                     createItem('Flex', 380, 320, 't'),
-                    createItem('Dart', 310, 340, 't'),
+                    createItem('Dart', 315, 340, 't'),
                     // [Assess]
                     createItem('Ruby', 250, 305, 't'),
-                    createItem('Go', 290, 315, 't'),
-                    createItem('Clojure', 290, 350, 't'),
+                    createItem('Go', 280, 315, 't'),
+                    createItem('Clojure', 270, 350, 't'),
                     // [Trial]
                     createItem('PHP', 120, 290, 't'),
-                    createItem('Groovy', 110, 350, 't'),
+                    createItem('Groovy', 120, 350, 't'),
                     createItem('Python', 140, 320, 't'),
                     // [Adopt]
                     
-                    createItem('HTML 5', 40, 320, 't'),
+                    createItem('HTML 5', 45, 300, 't'),
                     createItem('Docpad', 70, 320, 't'),
-                    createItem('Javascript', 40, 300, 't'),
-                    createItem('Node.js', 40, 340, 't'),
-                    createItem('Java', 20, 350, 't'),
-                    createItem('Objective C', 60, 350, 't')
+                    createItem('Javascript', 70, 290, 't'),
+                    createItem('Node.js', 50, 350, 't'),
+                    createItem('Java', 25, 330, 't'),
+                    createItem('Objective C', 80, 350, 't')
 
                 ]
             }
