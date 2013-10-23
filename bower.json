@@ -1,7 +1,6 @@
 {
   "name": "techradar",
   "version": "0.0.1",
-  "directory": "libs",
   "dependencies": {
     "d3": "3.2.7",
     "requirejs": "2.1.8",
