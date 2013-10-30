@@ -1,3 +1,6 @@
+# Fail fast if anything breaks
+set -e
+
 # Build the image
 echo "Building image..."
 docker build -t tech-radar /vagrant

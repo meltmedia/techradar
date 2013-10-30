@@ -31,6 +31,7 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8000,
+          keepalive: true,
           base: '.'
         }
       }
@@ -63,5 +64,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['bower', 'jshint']);
 
   grunt.registerTask('test', ['bower', 'jshint', 'mocha']);
+
+  grunt.registerTask('server', ['connect']);
 
 };

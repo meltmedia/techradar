@@ -1,0 +1,14 @@
+# Defaults
+defaults: {}
+
+branches:
+  - match: 'melt-radar'
+    realms:
+      - realm: 'not-production'
+        proxy:
+          - host: 'radar.cu.melt.sh'
+            paths:
+              - path: '/'
+                port: 8000
+        comptroller:
+          command: start
