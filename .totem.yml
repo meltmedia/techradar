@@ -9,6 +9,6 @@ branches:
           - host: 'radar.cu.melt.sh'
             paths:
               - path: '/'
-                port: 8000
+                port: 8080
         comptroller:
           command: start
