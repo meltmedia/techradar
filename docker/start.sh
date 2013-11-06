@@ -10,7 +10,7 @@ echo "Starting container..."
 CID=$(docker run -d tech-radar:latest)
 
 # Which public port is NATed to my container?
-PORT=$(docker port $CID 8000)
+PORT=$(docker port $CID 8080)
 
 # Inform as to where to find the running app
-echo "Tech Radar started at http://127.0.0.1:$PORT/radar.html"
+echo "Tech Radar started at http://localhost:$PORT/radar.html"
