@@ -98,6 +98,7 @@ define(function() {
                     createItem('Ant', 340, 45, 't'),
                     createItem('Zookeeper', 340, 80, 't'),
                     createItem('ActiveMQ', 350, 60, 't'),
+                    createItem('Less', 350, 20, 't'),
                     // [Assess]
                     createItem('etcd', 280, 15, 't'),                    
                     createItem('leiningen', 250, 50, 't'),
@@ -111,6 +112,7 @@ define(function() {
                     createItem('graphite', 120, 70, 't'),
                     createItem('MongoDB', 120, 50, 't'),
                     // [Adopt]
+                    createItem('Sass', 90, 65, 't'),
                     createItem('Require.js', 60, 15, 't'),
                     createItem('Bower', 85, 15, 't'),
                     createItem('Grunt', 30, 30, 't'),
@@ -122,7 +124,7 @@ define(function() {
                     createItem('MySQL', 80, 50, 't')                    
                 ]
             },
-            { "quadrant": "Platforms & Frameworks",
+            { "quadrant": "Platforms",
                 "left" :45,
                  "top" : (1200/2 + 18),
                 "color" : "#DC6F1D",
@@ -152,7 +154,7 @@ define(function() {
 
                 ]
             },
-            { "quadrant": "Languages & Frameworks",
+            { "quadrant": "Languages",
                 "color" : "#B70062",
                 "left"  : (1160-100+30),
                 "top" :   (1200/2 + 18),
