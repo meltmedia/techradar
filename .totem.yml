@@ -12,3 +12,13 @@ branches:
                 port: 8080
         comptroller:
           command: start
+  - match: 'melt-dev-radar'
+    realms:
+      - realm: 'not-production'
+        proxy:
+          - host: 'radar-dev.cu.melt.sh'
+            paths:
+              - path: '/'
+                port: 8080
+        comptroller:
+          command: start
