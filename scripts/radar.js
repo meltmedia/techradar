@@ -1,50 +1,79 @@
 /* globals define*/
  define(['utils', 'd3'], function (utils, d3) {
 
-  function displayArcs(radar, radarData) {
-    var archLabelPadding = 5;
+  function init(radarData) {
+    renderData(radarData);
+    initEvents();
+  }
 
-    var arcs = radar.append("g")
+  /*===============================
+    Display Arcs
+  ---------------------------------*/
+  function displayArcs(radar, radarData) {
+    var
+      body = d3.select("body"),
+      arcs,
+      arcLabelPadding = 5;
+
+    arcs = radar.append("g")
       .attr("class", "arcs")
       .selectAll("circle")
       .data(radarData.radar_arcs)
       .enter()
-      .append("g")
-      .attr("transform", function(d) {
-           d.x = radarData.w/2;
-           d.y = radarData.h/2;
-           return "translate(" + d.x + "," + d.y + ")"; 
-         });
+        .append("g")
+        .attr("class", "ring")
+        .attr("transform", function(d) {
+          d.x = radarData.w/2;
+          d.y = radarData.h/2;
+          return "translate(" + d.x + "," + d.y + ")"; 
+        });
 
-    arcs.append("circle")  
-      .attr("class", "arc")
+    /*===============================
+      Arcs
+    ---------------------------------*/
+    arcs.append("circle")
+      .attr("class", "arc-outline")
+
+      // Radius
       .attr("r", function(d) {
-          return d.r;
+        return d.r;
       })
-     .attr("fill", "none")
-     .attr("stroke", "gray")
-     .attr("stroke-width", 1);  
 
+      // Styles
+      .attr("fill", "none")
+      .attr("stroke", "#ccc")
+      .attr("stroke-width", 1);
+
+    /*===============================
+      Arc Labels
+    ---------------------------------*/
     arcs.append("text")
+      .attr("class", "arc-label")
       .attr("text-anchor", "middle")
+
+      // Positioning
       .attr("y", function(d) {
-        return -d.r - archLabelPadding;
+        return -d.r - arcLabelPadding;
       })
+
+      // Label Text
       .text(function(d) {
         return d.name;
       })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "11px");  
+
   }
 
-  function init(radarData) {
-    // $('#title').text(radarData.title);  
-
-    var blipLabelPadding = 8;
-    var defaultBlipSize = 300;
-
-    var globalIndex = 1;  // Start with one so the display is 1 based
-    var maxRadius = 0;
+  /*===============================
+    Render Data
+  ---------------------------------*/
+  function renderData(radarData) {
+    
+    var
+      radar = d3.select("body"),
+      blipLabelPadding = 8,
+      defaultBlipSize = 300,
+      globalIndex = 1,  // Start with one so the display is 1 based
+      maxRadius = 0;
 
     for (var arcIndex in radarData.radar_arcs) {
       maxRadius = Math.max(maxRadius, radarData.radar_arcs[arcIndex].r);
@@ -58,7 +87,8 @@
       }
     }
 
-    var radar = d3.select("body")
+    // Append svg element to the body
+    radar = d3.select("body")
       .append("svg")
       .attr("width", radarData.w)
       .attr("height", radarData.h);
@@ -66,59 +96,102 @@
     // Draw the radar arcs
     displayArcs(radar, radarData); 
 
-    // Draw the axis
+    /*==================================
+      Draw the axis
+    ------------------------------------*/
+
+    // X-Axis
     radar.append("g")
       .append("line")
-      .attr("stroke", "gray")
+      .attr("stroke", "#ccc")
       .attr("stroke-width", 1)
       .attr("x1", (radarData.w/2)-maxRadius)
       .attr("y1", radarData.h/2)
       .attr("x2", (radarData.w/2)+maxRadius)
       .attr("y2", radarData.h/2);
 
+    // Y-Axis
     radar.append("g")
       .append("line")
-      .attr("stroke", "gray")
+      .attr("stroke", "#ccc")
       .attr("stroke-width", 1)
       .attr("x1", radarData.w/2)
       .attr("y1", (radarData.h/2)-maxRadius)
       .attr("x2", radarData.w/2)
-      .attr("y2", (radarData.h/2)+maxRadius);  
+      .attr("y2", (radarData.h/2)+maxRadius);
 
-    // Draw the blips
+    /*==================================
+      Draw the Quadrants
+    ------------------------------------*/
     var techs = radar.append("g")
-      .attr("class", "radar blips")  
+      .attr("class", "radar")  
       .selectAll("g")
       .data(radarData.radar_data)
       .enter()
-      .append("g")
-      .text(function(d) {
-        return d.quadrant;
-      });
+        .append("g")
+          .attr("class", "quadrant")
+          .text(function(d) {
+            return d.quadrant;
+          });
 
+    /*==================================
+      Create the Blips
+    ------------------------------------*/
     var blips = techs.append("g")
       .selectAll("g")
       .data(function(d) {
         return d.items;
       })    
       .enter()
-      .append("g")
-      .attr("class", "blips")  
-      .attr("transform", function(d) {
-          var polar = utils.polar_to_raster(d.pc.r, d.pc.t, radarData.w, radarData.h);
+        .append("g")
+          .attr("class", "blip")
+          .attr("data-global-index", function(d){
+            return d.globalIndex;
+          })
+          .attr("transform", function(d) {
+            var polar = utils.polar_to_raster(d.pc.r, d.pc.t, radarData.w, radarData.h);
+            d.x = polar[0];
+            d.y = radarData.h-polar[1];
+            return "translate(" + d.x + "," + d.y + ")"; 
+          });
 
-          d.x = polar[0];
-          d.y = radarData.h-polar[1];
-          return "translate(" + d.x + "," + d.y + ")"; 
-        });  
+    /*==================================
+      Create Tooltips
+    ------------------------------------*/
+    var tooltips;
 
-    // The symbol for the blip
-    blips.append("path")  
-      .attr("class", "blip")
+    // Create tooltip element
+    blips.append("g")
+      .attr("class", "tooltip");
+
+    // Store all tooltips
+    tooltips = d3.selectAll(".tooltip");
+
+    // Tooltip container
+    tooltips.append("rect")
+        .attr("width", 130)
+        .attr("height", 19)
+        .attr("y", -35)
+        .attr("x", -65);
+
+    // Tooltip text
+    tooltips.append("text")
+      .attr("text-anchor", "middle")
+      .attr("y", -22)
+      .text(function() {
+        var data = d3.select(this.parentNode).datum();
+        return data.name;
+      });
+
+    /*==================================
+      Create the blip symbol
+    ------------------------------------*/
+    blips.append("path")
       .attr("d", function() {
-        var movement = d3.select(this.parentNode).datum().movement;
 
-        var type = "circle";
+        var
+          type = "circle",
+          movement = d3.select(this.parentNode).datum().movement;
 
         if (movement === "c") {
           type = "circle";
@@ -128,67 +201,86 @@
 
         return d3.svg.symbol().type(type).size(d3.select(this.parentNode).datum().blipSize || defaultBlipSize)();
        }) 
+
+      // Style
       .attr("fill", function() {
         return d3.select(this.parentNode.parentNode).datum().color;  
-       })
-      .attr("stroke", "gray")
-      .attr("stroke-width", 1);  
+       });
 
-    // The index for the blip
+    /*==================================
+      Create blip text element
+      - Shows the global index value
+    ------------------------------------*/
     blips.append("text")
       .attr("text-anchor", "middle")
+
+      // Positioning
       .attr("y", function() {
         return blipLabelPadding;
       })
-      .text(function(d) {    
+      
+      // Text
+      .text(function(d) {
         return d.globalIndex;
       })
-      .attr("fill", "white")    
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "11px");     
 
-    // Draw the legend
+      // Style
+      .attr("fill", "white");
+
+    /*==================================
+      Draw the Legends
+    ------------------------------------*/
     var legend = radar.append("g")
-      .attr("class", "radar legends")  
+      .attr("class", "radar legends")
       .selectAll("g")
       .data(radarData.radar_data)
       .enter()
       .append("g")
-      .text(function(d) {
-        return d.quadrant;
-      })
-      .attr("transform", function(d) {
+        .text(function(d) {
+          return d.quadrant;
+        })
+        .attr("transform", function(d) {
           d.x = d.left;
           d.y = d.top;
           return "translate(" + d.x + "," + d.y + ")"; 
         });    
 
-    // Header for each category
+    /*==================================
+      Legend Header
+    ------------------------------------*/
     legend.append("text")
+      .attr("class", "legend-heading")
       .attr("text-anchor", "left")
-      .attr("y", 4)  
+      .attr("y", -3)
+      .attr("x", -6)
       .text(function(d) {    
         return d.quadrant;
-      })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "18px");     
+      });
 
-    // Group all the legend entries together
+
+    /*==================================
+      Legend Entries
+    ------------------------------------*/
     var entry = legend.append("g")
       .selectAll("g")
       .data(function(d) {
         return d.items;
-      })    
+      })
       .enter()
       .append("g")
-      .attr("class", "blips")  
+      .attr("data-global-index", function(d){
+        return d.globalIndex;
+      })
+      .attr("class", "blip")  
       .attr("transform", function(d, i) {
           d.x = 0;
           d.y = 18 + i*18;
           return "translate(" + d.x + "," + d.y + ")"; 
         });  
 
-    // For each entry add a symbol to represent the change or lack there of
+    /*==================================
+      Legend List Item Symbol
+    ------------------------------------*/
     entry.append("path")  
       .attr("class", "blip")
       .attr("d", function() {
@@ -206,31 +298,50 @@
        }) 
       .attr("fill", function() {
         return d3.select(this.parentNode.parentNode).datum().color;  
-       })
-      .attr("stroke", "gray")
-      .attr("stroke-width", 1);  
+       });
 
-    // The index as seen on the radar
+    /*==================================
+      Legend List Item Index Number
+    ------------------------------------*/
     entry.append("text")
       .attr("text-anchor", "left")
-      .attr("x", 10)  
-      .attr("y", 4)  
-      .text(function(d) {    
+      .attr("x", 10)
+      .attr("y", 4)
+      .text(function(d) {
         return d.globalIndex;
-      })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "11px");   
+      });
 
-    // The name of the entry
+    /*==================================
+      Legend List Item Name
+    ------------------------------------*/
     entry.append("text")
       .attr("text-anchor", "left")
       .attr("x", 26)
-      .attr("y", 4)  
-      .text(function(d) {    
+      .attr("y", 4)
+      .text(function(d) {
         return d.name;
+      });
+
+  }
+
+  /*==================================
+    Init Events
+  ------------------------------------*/
+  function initEvents() {
+
+    d3.selectAll(".blip")
+      .on("mouseenter", function () {
+        var targetIndex  = d3.select(this).attr("data-global-index");
+        d3.selectAll(".blip").style("opacity", .2);
+        d3.selectAll('[data-global-index="' + targetIndex + '"]').style("opacity", 1);
+        d3.select(this).style("cursor", "pointer");
+        d3.selectAll('[data-global-index="' + targetIndex + '"]').select(".tooltip").style("opacity", 1);
       })
-      .attr("font-family", "sans-serif")
-      .attr("font-size", "11px");     
+      .on("mouseleave", function () {
+        d3.selectAll(".blip").style("opacity", 1);
+        d3.selectAll(".tooltip").style("opacity", 0);
+      });
+
   }
 
   return {
