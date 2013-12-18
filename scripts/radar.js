@@ -11,7 +11,6 @@
   ---------------------------------*/
   function displayArcs(radar, radarData) {
     var
-      body = d3.select("body"),
       arcs,
       arcLabelPadding = 5;
 
@@ -59,7 +58,7 @@
       // Label Text
       .text(function(d) {
         return d.name;
-      })
+      });
 
   }
 
@@ -332,7 +331,7 @@
     d3.selectAll(".blip")
       .on("mouseenter", function () {
         var targetIndex  = d3.select(this).attr("data-global-index");
-        d3.selectAll(".blip").style("opacity", .2);
+        d3.selectAll(".blip").style("opacity", 0.2);
         d3.selectAll('[data-global-index="' + targetIndex + '"]').style("opacity", 1);
         d3.selectAll('[data-global-index="' + targetIndex + '"]').select(".tooltip").style("opacity", 1);
       })
