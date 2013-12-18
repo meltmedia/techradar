@@ -334,7 +334,6 @@
         var targetIndex  = d3.select(this).attr("data-global-index");
         d3.selectAll(".blip").style("opacity", .2);
         d3.selectAll('[data-global-index="' + targetIndex + '"]').style("opacity", 1);
-        d3.select(this).style("cursor", "pointer");
         d3.selectAll('[data-global-index="' + targetIndex + '"]').select(".tooltip").style("opacity", 1);
       })
       .on("mouseleave", function () {

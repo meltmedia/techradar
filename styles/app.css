@@ -25,6 +25,10 @@ svg {
   display: block;
 }
 
+.blip:hover {
+  cursor: pointer;
+}
+
 .tooltip {
   -webkit-transition: all .3s ease;
   fill: black;
