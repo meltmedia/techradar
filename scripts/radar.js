@@ -89,6 +89,7 @@
     // Append svg element to the body
     radar = d3.select("body")
       .append("svg")
+      .attr("id", "radar")
       .attr("width", radarData.w)
       .attr("height", radarData.h);
 
@@ -166,45 +167,44 @@
     // Store all tooltips
     tooltips = d3.selectAll(".tooltip");
 
-    // Tooltip container
-    tooltips.append("rect")
-        .attr("width", 130)
-        .attr("height", 19)
-        .attr("y", -35)
-        .attr("x", -65);
-
     // Tooltip text
-    tooltips.append("text")
+    var tooltipLabel = tooltips.append("svg:text")
+      .attr("class", "tooltip-label")
+      .attr("x", 0)
+      .attr("y", -24)
+      .attr("dy", ".35em")
       .attr("text-anchor", "middle")
-      .attr("y", -22)
       .text(function() {
         var data = d3.select(this.parentNode).datum();
         return data.name;
       });
+
+    var bbox = tooltipLabel.node().getBBox();
+
+    //console.log(bbox.width);
+
+    // Tooltip container
+    tooltips.append("svg:rect")
+      .attr("width", bbox.width)
+      .attr("height", 15)
+      .attr("y", bbox.y)
+      .attr("x", bbox.x);
 
     /*==================================
       Create the blip symbol
     ------------------------------------*/
     blips.append("path")
       .attr("d", function() {
-
         var
-          type = "circle",
-          movement = d3.select(this.parentNode).datum().movement;
-
-        if (movement === "c") {
-          type = "circle";
-        } else if (movement === "t") {
-          type = "triangle-up";
-        }
-
+          movement = d3.select(this.parentNode).datum().movement,
+          type = movement ? "circle" : "triangle-up";
         return d3.svg.symbol().type(type).size(d3.select(this.parentNode).datum().blipSize || defaultBlipSize)();
-       }) 
+      }) 
 
       // Style
       .attr("fill", function() {
         return d3.select(this.parentNode.parentNode).datum().color;  
-       });
+      });
 
     /*==================================
       Create blip text element
@@ -229,30 +229,23 @@
     /*==================================
       Draw the Legends
     ------------------------------------*/
-    var legend = radar.append("g")
-      .attr("class", "radar legends")
-      .selectAll("g")
+    var legend = d3.select("body").append("div")
+      .attr("class", "radar-legends")
+      .selectAll("div")
       .data(radarData.radar_data)
       .enter()
-      .append("g")
-        .text(function(d) {
-          return d.quadrant;
-        })
-        .attr("transform", function(d) {
-          d.x = d.left;
-          d.y = d.top;
-          return "translate(" + d.x + "," + d.y + ")"; 
-        });    
+        .append("div")
+        .attr("class", "legend")
+        .attr("id", function(d){
+          return d.quadrant.replace(/\s+/g, '-').toLowerCase();
+        });
 
     /*==================================
       Legend Header
     ------------------------------------*/
-    legend.append("text")
+    legend.append("h3")
       .attr("class", "legend-heading")
-      .attr("text-anchor", "left")
-      .attr("y", -3)
-      .attr("x", -6)
-      .text(function(d) {    
+      .text(function(d) {
         return d.quadrant;
       });
 
@@ -260,44 +253,46 @@
     /*==================================
       Legend Entries
     ------------------------------------*/
-    var entry = legend.append("g")
-      .selectAll("g")
+    var entry = legend.append("ul")
+      .attr("class","legend-list")
+      .selectAll("li")
       .data(function(d) {
         return d.items;
       })
       .enter()
-      .append("g")
-      .attr("data-global-index", function(d){
-        return d.globalIndex;
-      })
-      .attr("class", "blip")  
-      .attr("transform", function(d, i) {
-          d.x = 0;
-          d.y = 18 + i*18;
-          return "translate(" + d.x + "," + d.y + ")"; 
-        });  
+        .append("li")
+          .append("a")
+          .attr("href", function (d) {
+            return "?item=" + d.name.replace(/\s+/g, '-').toLowerCase();
+          })
+          .attr("data-global-index", function(d){
+            return d.globalIndex;
+          })
+          .attr("class", "blip");
 
     /*==================================
       Legend List Item Symbol
     ------------------------------------*/
-    entry.append("path")  
-      .attr("class", "blip")
+    var entryIcon = entry.append("svg")
+      .attr("height", 10)
+      .attr("width", 15);
+
+    entryIcon.append("path")
+      .attr("height", 12)
+      .attr("width", 10)
       .attr("d", function() {
-        var movement = d3.select(this.parentNode).datum().movement;
-
-        var type = "circle";
-
-        if (movement === "c") {
-          type = "circle";
-        } else if (movement === "t") {
-          type = "triangle-up";
-        }
-
+        var
+          movement = d3.select(this.parentNode.parentNode.parentNode.parentNode).datum().movement,
+          type = movement ? "circle" : "triangle-up";
         return d3.svg.symbol().type(type)();
-       }) 
+      })
+      .attr("transform", function(){
+        // Positions the triange inside the svg element
+        return "translate(" + 6 + "," + 6 + ")";
+      })
       .attr("fill", function() {
-        return d3.select(this.parentNode.parentNode).datum().color;  
-       });
+        return d3.select(this.parentNode.parentNode.parentNode.parentNode).datum().color;  
+      });
 
     /*==================================
       Legend List Item Index Number
@@ -306,8 +301,9 @@
       .attr("text-anchor", "left")
       .attr("x", 10)
       .attr("y", 4)
+      .attr("text-anchor", "right")
       .text(function(d) {
-        return d.globalIndex;
+        return d.globalIndex + " ";
       });
 
     /*==================================
