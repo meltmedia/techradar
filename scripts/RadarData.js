@@ -134,7 +134,7 @@ define(function() {
             },
             { "quadrant": "Platforms",
                 "left" :45,
-                 "top" : (1000/2 + 50),
+                "top" : (1000/2 + 50),
                 "color" : "#DC6F1D",
                 // [Platforms] (180 - 270)
                 "items" : [

@@ -1,19 +1,71 @@
 /* globals define*/
  define(['utils', 'd3'], function (utils, d3) {
 
+  var
+    radar,
+    arcs,
+    blipLabelPadding = 8,
+    defaultBlipSize = 300,
+    globalIndex = 1,  // Start with one so the display is 1 based
+    maxRadius = 0;
+
   function init(radarData) {
-    renderData(radarData);
+    drawRadar(radarData);
+    renderRadarData(radarData);
     initEvents();
   }
 
-  /*===============================
-    Display Arcs
-  ---------------------------------*/
-  function displayArcs(radar, radarData) {
-    var
-      arcs,
-      arcLabelPadding = 5;
+  /*===================================
+    Draw Radar Outline
+  -------------------------------------*/
+  function drawRadar(radarData) {
 
+    for (var arcIndex in radarData.radar_arcs) {
+      maxRadius = Math.max(maxRadius, radarData.radar_arcs[arcIndex].r);
+    }
+
+    // Compute the global index on all the entries
+    // this mutates the data
+    for (var quad in radarData.radar_data) {
+      for (var item in radarData.radar_data[quad].items) {
+        radarData.radar_data[quad].items[item].globalIndex = globalIndex++;
+      }
+    }
+
+    // Append svg element to the body
+    radar = d3.select("body")
+      .append("svg")
+      .attr("id", "radar")
+      .attr("width", radarData.w)
+      .attr("height", radarData.h);
+
+    /*==================================
+      Draw X/Y axis
+    ------------------------------------*/
+
+    // X-Axis
+    radar.append("g")
+      .append("line")
+      .attr("stroke", "#ccc")
+      .attr("stroke-width", 1)
+      .attr("x1", (radarData.w/2)-maxRadius)
+      .attr("y1", radarData.h/2)
+      .attr("x2", (radarData.w/2)+maxRadius)
+      .attr("y2", radarData.h/2);
+
+    // Y-Axis
+    radar.append("g")
+      .append("line")
+      .attr("stroke", "#ccc")
+      .attr("stroke-width", 1)
+      .attr("x1", radarData.w/2)
+      .attr("y1", (radarData.h/2)-maxRadius)
+      .attr("x2", radarData.w/2)
+      .attr("y2", (radarData.h/2)+maxRadius);
+
+    /*===============================
+      Arcs
+    ---------------------------------*/
     arcs = radar.append("g")
       .attr("class", "arcs")
       .selectAll("circle")
@@ -26,9 +78,9 @@
           d.y = radarData.h/2;
           return "translate(" + d.x + "," + d.y + ")"; 
         });
-
+    
     /*===============================
-      Arcs
+      Arc Outline
     ---------------------------------*/
     arcs.append("circle")
       .attr("class", "arc-outline")
@@ -52,73 +104,20 @@
 
       // Positioning
       .attr("y", function(d) {
-        return -d.r - arcLabelPadding;
+        return -d.r - 5;
       })
 
       // Label Text
       .text(function(d) {
         return d.name;
       });
-
   }
+
 
   /*===============================
     Render Data
   ---------------------------------*/
-  function renderData(radarData) {
-    
-    var
-      radar = d3.select("body"),
-      blipLabelPadding = 8,
-      defaultBlipSize = 300,
-      globalIndex = 1,  // Start with one so the display is 1 based
-      maxRadius = 0;
-
-    for (var arcIndex in radarData.radar_arcs) {
-      maxRadius = Math.max(maxRadius, radarData.radar_arcs[arcIndex].r);
-    }
-
-    // Compute the global index on all the entries
-    // this mutates the data
-    for (var quad in radarData.radar_data) {
-      for (var item in radarData.radar_data[quad].items) {
-        radarData.radar_data[quad].items[item].globalIndex = globalIndex++;
-      }
-    }
-
-    // Append svg element to the body
-    radar = d3.select("body")
-      .append("svg")
-      .attr("id", "radar")
-      .attr("width", radarData.w)
-      .attr("height", radarData.h);
-
-    // Draw the radar arcs
-    displayArcs(radar, radarData); 
-
-    /*==================================
-      Draw the axis
-    ------------------------------------*/
-
-    // X-Axis
-    radar.append("g")
-      .append("line")
-      .attr("stroke", "#ccc")
-      .attr("stroke-width", 1)
-      .attr("x1", (radarData.w/2)-maxRadius)
-      .attr("y1", radarData.h/2)
-      .attr("x2", (radarData.w/2)+maxRadius)
-      .attr("y2", radarData.h/2);
-
-    // Y-Axis
-    radar.append("g")
-      .append("line")
-      .attr("stroke", "#ccc")
-      .attr("stroke-width", 1)
-      .attr("x1", radarData.w/2)
-      .attr("y1", (radarData.h/2)-maxRadius)
-      .attr("x2", radarData.w/2)
-      .attr("y2", (radarData.h/2)+maxRadius);
+  function renderRadarData(radarData) {
 
     /*==================================
       Draw the Quadrants
@@ -178,17 +177,6 @@
         var data = d3.select(this.parentNode).datum();
         return data.name;
       });
-
-    var bbox = tooltipLabel.node().getBBox();
-
-    //console.log(bbox.width);
-
-    // Tooltip container
-    tooltips.append("svg:rect")
-      .attr("width", bbox.width)
-      .attr("height", 15)
-      .attr("y", bbox.y)
-      .attr("x", bbox.x);
 
     /*==================================
       Create the blip symbol
@@ -319,6 +307,13 @@
 
   }
 
+  
+
+  function zoomQuadrant(radarData, quadrant) {
+
+
+  }
+
   /*==================================
     Init Events
   ------------------------------------*/
@@ -334,6 +329,11 @@
       .on("mouseleave", function () {
         d3.selectAll(".blip").style("opacity", 1);
         d3.selectAll(".tooltip").style("opacity", 0);
+      });
+
+    d3.selectAll(".legend-heading")
+      .on("click", function () {
+        //drawQuadrant(radar_data, "techniques");
       });
 
   }
