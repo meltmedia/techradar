@@ -9,13 +9,15 @@ module.exports = function(grunt) {
     banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
       '<%= grunt.template.today("yyyy-mm-dd") %>*/',
     clean: ['<%= distdir %>/*'],
+    
     bower: {
-      install: {     
+      install: {
         options: {
           cleanup: true
         }
       }
     },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -27,44 +29,67 @@ module.exports = function(grunt) {
         src: ['scripts/*.js']
       }
     },
+
+    sass: {
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: {
+          'styles/app.css': 'styles/app.scss'
+        }
+      }
+    },
+
     connect: {
       server: {
         options: {
-          port: 8000,
-          keepalive: true,
+          port: 9778,
           base: '.'
         }
       }
     },
+    
     mocha: {
       index: [ 'test/runner/index.html' ]
     },
+    
     watch: {
+      css: {
+        files: ['**/*.scss'],
+        tasks: ['sass'],
+        options: {
+          spawn: false
+        }
+      },
+      scripts: {
+        files: ['scripts/**/*.js'],
+        tasks: ['jshint'],
+        options: {
+          spawn: false
+        }
+      },
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
-      },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'qunit']
       }
     }
+
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-bower-task');
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
   grunt.registerTask('default', ['bower', 'jshint']);
-
   grunt.registerTask('test', ['bower', 'jshint', 'mocha']);
-
   grunt.registerTask('server', ['connect']);
+  grunt.registerTask('run', ['sass', 'connect', 'watch']);
 
 };

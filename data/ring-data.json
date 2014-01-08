@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Hold",
+        "height": 900,
+        "width": 900
+    },
+    {
+        "name": "Assess",
+        "height": 700,
+        "width": 700
+    },
+    {
+        "name": "Trial",
+        "height": 500,
+        "width": 500
+    },
+    {
+        "name": "Adopt",
+        "height": 300,
+        "width": 300
+    }
+]

@@ -1,0 +1,33 @@
+/*==================================
+  Site Header
+------------------------------------*/
+
+#site-header {
+  background: #303030;
+}
+
+#site-header h1 {
+  background: url(../images/icon-melt.png) no-repeat 10px 45%;
+  background-size: 25px auto;
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0;
+  padding: 10px;
+  padding-left: 42px;
+}
+
+#btn-edit {
+  background: #000 url(../images/icon-edit.png) no-repeat 15px center;
+  color: #fff;
+  float: right;
+  font-size: .8em;
+  font-weight: bold;
+  letter-spacing: .05em;
+  margin: 0;
+  padding: 11px 20px 10px 40px;
+  text-decoration: none;
+  text-transform: uppercase;
+}

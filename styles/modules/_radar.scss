@@ -1,0 +1,199 @@
+
+#dragit-overlay {
+  background: transparent;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/*==================================
+  Chart
+------------------------------------*/
+
+#chart {
+  float: right;
+  height: 901px;
+  margin: 50px 0;
+  position: relative;
+  width: 901px;
+}
+
+/*==================================
+  Rings
+------------------------------------*/
+
+.ring {
+  background: transparent;
+  border: 1px solid #dadada;
+  border-radius: 900px;
+  display: block;
+  left: 50%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+}
+
+/*==================================
+  Rings: Ring Label
+------------------------------------*/
+
+.ring-label {
+  color: #B0B0B0;
+  font-size: .8em;
+  font-weight: bold;
+  left: -5px;
+  margin: 3px 0 0 0;
+  position: relative;
+  text-transform: uppercase;
+  text-align: right;
+  top: 50%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*==================================
+  Quadrant
+------------------------------------*/
+
+.quadrant {
+  border: 1px solid #e0e0e0;
+  border-width: 1px 0 0 1px;
+  position: absolute;
+  height: 449px;
+  width: 449px;
+}
+
+.quadrant-label {
+  color: #5a5a5a;
+  font-size: 1.2em;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-transform: uppercase;
+}
+
+/*==================================
+  Quadrant: Techniques
+------------------------------------*/
+
+#techniques {
+  left: 0;
+  top: 0;
+  -webkit-transform: rotate(-180deg);
+}
+
+#techniques .ring-label {
+  top: 0;
+  margin-top: 50%;
+  margin-left: 100%;
+  -webkit-transform: rotate(180deg);
+}
+
+#techniques .blip {
+  -webkit-transform: rotate(180deg);
+}
+
+#techniques .quadrant-label {
+  -webkit-transform: rotate(180deg);
+}
+
+/*==================================
+  Quadrant: Platforms
+------------------------------------*/
+
+#platforms {
+  bottom: 0;
+  left: 0;
+  -webkit-transform: rotate(90deg);
+}
+
+#platforms .blip {
+  -webkit-transform: rotate(-90deg);
+}
+
+#platforms .quadrant-label {
+  bottom: 28px;
+  right: -22px;
+  -webkit-transform: rotate(-90deg);
+}
+
+/*==================================
+  Quadrant: Tools
+------------------------------------*/
+
+#tools {
+  right: 0;
+  top: 0;
+  -webkit-transform: rotate(-90deg);
+}
+
+#tools .blip {
+  -webkit-transform: rotate(90deg);
+}
+
+#tools .quadrant-label {
+  bottom: 5px;
+  -webkit-transform: rotate(90deg);
+}
+
+/*==================================
+  Quadrant: Language
+------------------------------------*/
+#languages {
+  bottom: 0;
+  right: 0;
+  -webkit-transform: rotate(0);
+}
+
+#languages .blip {
+  -webkit-transform: rotate(0);
+}
+
+#languages .quadrant-label {
+  -webkit-transform: rotate(0deg);
+}
+
+/*==================================
+  Blips
+------------------------------------*/
+
+.blip {
+  background: #000;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: .9em;
+  font-weight: bold;
+  height: 25px;
+  line-height: 25px;
+  list-style: none;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  width: 25px;
+  z-index: 1000;
+  -webkit-transition: none;
+}
+
+.blip:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.blip-tooltip {
+  color: #4a4a4a;
+  display: none;
+  font-size: .85em;
+  position: absolute;
+  bottom: -25px;
+  text-align: center;
+  line-height: 1.1;
+  left: 0;
+}
+

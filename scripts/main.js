@@ -1,18 +1,14 @@
-/* global requirejs, require */
-requirejs.config({
-    
-  paths: {
-    "d3": "../lib/d3/d3",
-    "underscore": "../lib/underscore/underscore"
-  },
+define([
+  "jquery",
+  "classes/Radar"
+], function($, Radar){
 
-  shim: {
-    d3: {
-      exports: 'd3'
-    }
-  }  
-});
+  var techRadar = new Radar();
 
-require(['radar', 'RadarData'], function(radar, radarData){
-  radar.init(radarData);
+  // Blip List Accordion Toggle
+  $('body').on("click", '[data-toggle="item-list"]', function (ev) {
+    ev.preventDefault();
+    $(this).parent().find(".item-list").slideToggle();
+  });
+
 });

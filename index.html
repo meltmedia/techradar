@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+
+  <!-- Basic Page Info
+  ================================================== -->
+  <meta charset="utf-8">
+  <title>Tech Radar</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" href="styles/app.css">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+  
+  <div id="site-header">
+    <h1>Tech<strong>Radar</strong></h1>
+    <a id="btn-edit" href="#">Edit</a>
+  </div>
+  
+  <div class="container">
+    <div id="nav">
+      <ul id="nav-items"></ul>
+    </div>
+
+    <div id="chart"></div>
+  </div>
+
+  <!-- Overlay used for Drag and Drop functionality -->
+  <div id="dragit-overlay"></div>
+  
+  <!-- Quadrant HTML Template
+  ================================================= -->
+  <script type="text/javascripts" id="quadrant-template">
+    <div id="<%= name.toLowerCase() %>" class="quadrant">
+      <h2 class="quadrant-label"><%= name %></h2>
+    </div>
+  </script>
+  
+  <!-- Blip HTML Template
+  ================================================= -->
+  <script type="text/template" id="blip-template">
+    <a class="blip" href="#" data-blip="<%= name.replace(/\s+/g, '-').toLowerCase() %>">
+      <span class="blip-symbol"></span>
+      <span class="blip-index"><%= blipIndex %></span>
+      <span class="blip-tooltip"><%= name %></span>
+    </a>
+  </script>
+  
+  <!-- Blip List Template
+  ================================================= -->
+  <script type="text/javascripts" id="blip-list-template">
+    <li>
+      <a href="#" data-toggle="item-list"><span class="blip blip-symbol" style="background: <%= color %>;"></span><%= name %></a>
+      <ul class="item-list">
+        <% _(items).each(function(value, index){ %>
+          <li><a href="#" data-blip="<%= value.name.replace(/\s+/g, '-').toLowerCase() %>"><span class="index"><%= value.blipIndex %></span> <%= value.name %></a></li>
+        <% }); %>
+      </ul>
+    </li>
+  </script>
+
+  <!-- JS
+  ================================================== -->
+  <script src="require.config.js"></script>
+  <script data-main="main" src="lib/requirejs/require.js"></script>
+  
+
+<!-- 
+  // <script src="js/libs/jquery-1.7.2.min.js"></script>
+  // <script src="js/libs/underscore-1.5.2.min.js"></script>
+  // <script src="js/libs/modernizr-2.5.3.min.js"></script>
+  // <script src="js/Radar.js"></script>
+  // <script src="js/Quadrant.js"></script>
+  // <script src="js/Ring.js"></script>
+  // <script src="js/RingLabel.js"></script>
+  // <script src="js/DragIt.js"></script>
+  // <script src="js/Blip.js"></script>
+  // <script src="js/BlipList.js"></script>
+  // <script src="js/main.js"></script>
+-->
+
+</body>
+</html>

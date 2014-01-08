@@ -1,93 +1,561 @@
+@import url(lib/normalize.css);
+/* --- [ BASE ] --- */
+#loading-overlay {
+  background: #fff;
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
 
-* {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+.mobile-only {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
+.desktop-only {
+  display: block;
+}
+@media only screen and (max-width: 767px) {
+  .desktop-only {
+    display: none;
+  }
+}
+
+.clear:before, .clear:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+.clear:after {
+  clear: both;
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.inline {
+  display: inline-block;
+  width: auto;
+}
+
+.block {
+  display: block;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.center {
+  display: block;
+  margin: 0 auto;
 }
 
 body {
-  background: #ebebeb;
-  color: #444;
-  font-family: helvetica, arial, verdana, sans-serif;
-  font-size: 11px;
-  line-height: 1;
-  margin: 0;
-  padding: 0;
-}
-
-#radar {
-  display: block;
-  margin: 50px auto;
-}
-
-svg {
-  position: relative;
-}
-
-.blip {
-  -webkit-transition: all .3s ease;
-  display: block;
-}
-
-.blip:hover {
-  cursor: pointer;
-}
-
-.tooltip {
-  -webkit-transition: all .3s ease;
-  opacity: 0;
-  position: relative;
-  z-index: 5000;
-}
-
-.tooltip text {
-  fill: #333;
-  font-weight: bold;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+  font: 400 14px/1 helvetica, arial, verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-.legend {
-  position: absolute;
+h1, .h1 {
+  font-size: 1.7em;
 }
 
-.legend-heading {
-  font-size: 18px;
+h2, .h2 {
+  font-size: 1.3em;
 }
 
-.legend ul {
+h3, .h3 {
+  font-size: 1.1em;
+}
+
+h4, .h4 {
+  font-size: 1em;
+}
+
+h5, .h5 {
+  font-size: 0.8em;
+}
+
+h6, .h6 {
+  font-size: 0.7em;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0 0 .75em 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul {
+  margin: 0 0 1.25em 0;
+  padding: 0 0 0 20px;
+}
+
+li {
+  margin-bottom: .5em;
+}
+li ul {
+  margin-top: .75em;
+  padding-left: 10px;
+}
+li ul li {
+  list-style: none;
+  padding-left: 20px;
+}
+
+p, li {
+  color: #202020;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0 0 1.5em 0;
+}
+
+.footnote {
+  color: #999;
+  font-size: .85em;
+}
+
+em,
+cite {
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+strong {
+  font-weight: bold;
+}
+
+sup,
+sub {
+  font-size: .7em;
+}
+
+hr,
+.divider {
+  background: #e0e0e0;
+  background: -moz-linear-gradient(left, white 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, white 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, white), color-stop(15%, #e0e0e0), color-stop(50%, #e0e0e0), color-stop(86%, #e0e0e0), color-stop(100%, white));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, white 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, white 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, white 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, white 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, white 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, white 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, white 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, white 100%);
+  /* W3C */
+  border: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
+  /* IE6-9 */
+  display: block;
+  height: 1px;
+  margin: 2.5em 0;
+  padding: 0;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f1f1f1;
+}
+
+.container {
+  margin: 0 auto;
+  width: 1250px;
+}
+
+/* --- [ MODULES ] --- */
+/*==================================
+  Site Header
+------------------------------------*/
+#site-header {
+  background: #303030;
+}
+
+#site-header h1 {
+  background: url(../images/icon-melt.png) no-repeat 10px 45%;
+  background-size: 25px auto;
+  color: #fff;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0;
+  padding: 10px;
+  padding-left: 42px;
+}
+
+#btn-edit {
+  background: black url(../images/icon-edit.png) no-repeat 15px center;
+  color: #fff;
+  float: right;
+  font-size: .8em;
+  font-weight: bold;
+  letter-spacing: .05em;
+  margin: 0;
+  padding: 11px 20px 10px 40px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+/*==================================
+  Footer
+------------------------------------*/
+#footer {
+  border-top: 1px solid #dadada;
+  clear: both;
+  display: block;
+  margin: 100px auto;
+  padding: 30px 0;
+  text-align: center;
+  width: 100%;
+}
+
+#footer a {
+  color: #c0c0c0;
+  font-size: .85em;
+  text-decoration: none;
+}
+
+/*==================================
+  Nav
+------------------------------------*/
+#nav {
+  float: left;
+  margin-top: 75px;
+  width: 250px;
+}
+
+#nav-items {
+  border-bottom: 1px dashed #d0d0d0;
   margin: 0;
   padding: 0;
 }
 
-.legend li {
-  list-style: none;
-  margin: 0 0 5px 0;
+#nav-items li {
+  margin: 0;
+  overflow: hidden;
   padding: 0;
 }
 
-.legend a {
-  color: #444;
+#nav-items a {
+  color: #8a8a8a;
+  display: block;
+  border-top: 1px dashed #d0d0d0;
+  letter-spacing: .05em;
+  padding: 10px 15px 10px 50px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all .3s ease;
+}
+
+#nav-items a:hover {
+  color: #333;
+}
+
+#nav .blip-symbol {
+  background: #B70062;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+#nav .item-list {
+  display: none;
+  margin: 10px 0 20px 14px;
+  padding: 0;
+}
+
+#nav .item-list a {
+  border: none;
+  font-size: .9em;
+  padding: 3px 0;
+  text-transform: none;
+}
+
+.item-list .index {
+  float: left;
+  margin-right: 10px;
+  text-align: right;
+  width: 15px;
+}
+
+#dragit-overlay {
+  background: transparent;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+/*==================================
+  Chart
+------------------------------------*/
+#chart {
+  float: right;
+  height: 901px;
+  margin: 50px 0;
+  position: relative;
+  width: 901px;
+}
+
+/*==================================
+  Rings
+------------------------------------*/
+.ring {
+  background: transparent;
+  border: 1px solid #dadada;
+  border-radius: 900px;
+  display: block;
+  left: 50%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+}
+
+/*==================================
+  Rings: Ring Label
+------------------------------------*/
+.ring-label {
+  color: #B0B0B0;
+  font-size: .8em;
+  font-weight: bold;
+  left: -5px;
+  margin: 3px 0 0 0;
+  position: relative;
+  text-transform: uppercase;
+  text-align: right;
+  top: 50%;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*==================================
+  Quadrant
+------------------------------------*/
+.quadrant {
+  border: 1px solid #e0e0e0;
+  border-width: 1px 0 0 1px;
+  position: absolute;
+  height: 449px;
+  width: 449px;
+}
+
+.quadrant-label {
+  color: #5a5a5a;
+  font-size: 1.2em;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-transform: uppercase;
+}
+
+/*==================================
+  Quadrant: Techniques
+------------------------------------*/
+#techniques {
+  left: 0;
+  top: 0;
+  -webkit-transform: rotate(-180deg);
+}
+
+#techniques .ring-label {
+  top: 0;
+  margin-top: 50%;
+  margin-left: 100%;
+  -webkit-transform: rotate(180deg);
+}
+
+#techniques .blip {
+  -webkit-transform: rotate(180deg);
+}
+
+#techniques .quadrant-label {
+  -webkit-transform: rotate(180deg);
+}
+
+/*==================================
+  Quadrant: Platforms
+------------------------------------*/
+#platforms {
+  bottom: 0;
+  left: 0;
+  -webkit-transform: rotate(90deg);
+}
+
+#platforms .blip {
+  -webkit-transform: rotate(-90deg);
+}
+
+#platforms .quadrant-label {
+  bottom: 28px;
+  right: -22px;
+  -webkit-transform: rotate(-90deg);
+}
+
+/*==================================
+  Quadrant: Tools
+------------------------------------*/
+#tools {
+  right: 0;
+  top: 0;
+  -webkit-transform: rotate(-90deg);
+}
+
+#tools .blip {
+  -webkit-transform: rotate(90deg);
+}
+
+#tools .quadrant-label {
+  bottom: 5px;
+  -webkit-transform: rotate(90deg);
+}
+
+/*==================================
+  Quadrant: Language
+------------------------------------*/
+#languages {
+  bottom: 0;
+  right: 0;
+  -webkit-transform: rotate(0);
+}
+
+#languages .blip {
+  -webkit-transform: rotate(0);
+}
+
+#languages .quadrant-label {
+  -webkit-transform: rotate(0deg);
+}
+
+/*==================================
+  Blips
+------------------------------------*/
+.blip {
+  background: #000;
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: .9em;
+  font-weight: bold;
+  height: 25px;
+  line-height: 25px;
+  list-style: none;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  width: 25px;
+  z-index: 1000;
+  -webkit-transition: none;
+}
+
+.blip:hover {
+  color: #fff;
   text-decoration: none;
 }
 
-#techniques {
-  left: 50px;
-  top: 20px;
+.blip-tooltip {
+  color: #4a4a4a;
+  display: none;
+  font-size: .85em;
+  position: absolute;
+  bottom: -25px;
+  text-align: center;
+  line-height: 1.1;
+  left: 0;
 }
 
-#tools {
-  right: 50px;
-  top: 20px;
+/* --- [ PRINT ] --- */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
 }
 
-#platforms {
-  left: 50px;
-  top: 525px
-}
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
 
-#languages {
-  right: 50px;
-  top: 525px;
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
 }
