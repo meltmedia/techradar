@@ -44,7 +44,8 @@ module.exports = function(grunt) {
     connect: {
       server: {
         options: {
-          port: 9778,
+          hostname: '*',
+          port: 5555,
           base: '.'
         }
       }
@@ -87,7 +88,7 @@ module.exports = function(grunt) {
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
-  grunt.registerTask('default', ['bower', 'jshint']);
+  grunt.registerTask('prepare', ['bower', 'jshint']);
   grunt.registerTask('test', ['bower', 'jshint', 'mocha']);
   grunt.registerTask('server', ['connect']);
   grunt.registerTask('run', ['sass', 'connect', 'watch']);
