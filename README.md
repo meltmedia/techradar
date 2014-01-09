@@ -1,5 +1,4 @@
 #Tech Radar
----
 
 ###Description
 
@@ -10,7 +9,6 @@ The goal of the technology radar is to communicate the things we use at meltmedi
 ### Requirements
 
 - bower ([http://bower.io/](http://bower.io/))
-
 
 ###Setup
 
