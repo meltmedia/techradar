@@ -8,7 +8,7 @@ RUN cd /var/www/tech-radar && npm install -g grunt-cli
 # Install node-static for server (grunt connect wasn't working with Docker for some reason)
 RUN cd /var/www/tech-radar && npm install -g node-static
 RUN cd /var/www/tech-radar && npm install
-RUN cd /var/www/tech-radar && grunt
+RUN cd /var/www/tech-radar && grunt prepare
 
 EXPOSE 8080
 

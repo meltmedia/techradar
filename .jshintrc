@@ -12,5 +12,7 @@
     "eqnull": true,
     "browser": true,
     "laxcomma": true,
-    "globals": {}
+    "globals": {
+        "define": true
+    }
 }
