@@ -10,6 +10,8 @@ branches:
             paths:
               - path: '/'
                 port: 8080
+        comptroller:
+          command: start
   - match: 'master'
     realms:
       - realm: 'production'
@@ -22,3 +24,5 @@ branches:
             paths:
               - path: '/'
                 port: 8080
+        comptroller:
+          command: start
