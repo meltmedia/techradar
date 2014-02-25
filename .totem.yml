@@ -2,23 +2,23 @@
 defaults: {}
 
 branches:
-  - match: 'melt-radar'
+  - match: 'develop'
     realms:
       - realm: 'not-production'
         proxy:
-          - host: 'radar.cu.melt.sh'
+          - host: 'techradar.cu.melt.sh'
             paths:
               - path: '/'
                 port: 8080
-        comptroller:
-          command: start
-  - match: 'melt-dev-radar'
+  - match: 'master'
     realms:
-      - realm: 'not-production'
+      - realm: 'production'
         proxy:
-          - host: 'radar-dev.cu.melt.sh'
+          - host: 'techradar.au.melt.sh'
             paths:
               - path: '/'
                 port: 8080
-        comptroller:
-          command: start
+          - host: 'techradar.meltmedia.com'
+            paths:
+              - path: '/'
+                port: 8080
