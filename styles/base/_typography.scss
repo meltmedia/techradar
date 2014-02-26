@@ -1,0 +1,82 @@
+body {
+  font: 400 14px/1 helvetica, arial, verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, .h1   { font-size: 1.7em; }
+h2, .h2   { font-size: 1.3em; }
+h3, .h3   { font-size: 1.1em; }
+h4, .h4   { font-size: 1em;   }
+h5, .h5   { font-size: 0.8em; }
+h6, .h6   { font-size: 0.7em; }
+
+h1, h2, h3, h4, h5 {
+  margin: 0 0 .75em 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul {
+  margin: 0 0 1.25em 0;
+  padding: 0 0 0 20px;
+}
+
+li {
+  margin-bottom: .5em;
+  ul {
+    margin-top: .75em;
+    padding-left: 10px;
+    li {
+      list-style: none;
+      padding-left: 20px;
+    }
+  }  
+}
+
+p, li {
+  color: #202020;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0 0 1.5em 0;
+}
+
+.footnote {
+  color: #999;
+  font-size: .85em;
+}
+
+em,
+cite {
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  @include transition(all .3s ease);
+}
+
+strong {
+  font-weight: bold;
+}
+
+sup,
+sub {
+  font-size: .7em;
+}
+
+hr,
+.divider {
+  background: #e0e0e0;
+  background: -moz-linear-gradient(left, #ffffff 0%, #e0e0e0 15%, #e0e0e0 50%, #e0e0e0 86%, #ffffff 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(15%,#e0e0e0), color-stop(50%,#e0e0e0), color-stop(86%,#e0e0e0), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #ffffff 0%,#e0e0e0 15%,#e0e0e0 50%,#e0e0e0 86%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #ffffff 0%,#e0e0e0 15%,#e0e0e0 50%,#e0e0e0 86%,#ffffff 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #ffffff 0%,#e0e0e0 15%,#e0e0e0 50%,#e0e0e0 86%,#ffffff 100%); /* IE10+ */
+  background: linear-gradient(to right, #ffffff 0%,#e0e0e0 15%,#e0e0e0 50%,#e0e0e0 86%,#ffffff 100%); /* W3C */
+  border: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+  display: block;
+  height: 1px;
+  margin: 2.5em 0;
+  padding: 0;
+}
+

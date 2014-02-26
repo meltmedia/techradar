@@ -1,0 +1,343 @@
+
+* {
+	-webkit-box-sizing: border-box;
+		 -moz-box-sizing: border-box;
+					box-sizing: border-box;
+}
+
+body {
+	background: #f1f1f1;
+	font-family: helvetica, arial, verdana, sans-serif;
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.clear {
+	clear: both;
+}
+
+#dragit-overlay {
+	background: transparent;
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9999;
+}
+
+.container {
+	margin: 0 auto;
+	width: 1250px;
+}
+
+/*==================================
+  Site Header
+------------------------------------*/
+
+#site-header {
+	background: #303030;
+}
+
+#site-header h1 {
+	background: url(../images/icon-melt.png) no-repeat 10px 45%;
+	background-size: 25px auto;
+	color: #fff;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: normal;
+	line-height: 1;
+	margin: 0;
+	padding: 10px;
+	padding-left: 42px;
+}
+
+#btn-edit {
+	background: #000 url(../images/icon-edit.png) no-repeat 15px center;
+	color: #fff;
+	float: right;
+	font-size: .8em;
+	font-weight: bold;
+	letter-spacing: .05em;
+	margin: 0;
+	padding: 11px 20px 10px 40px;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+/*==================================
+  Nav
+------------------------------------*/
+
+#nav {
+	float: left;
+	margin-top: 75px;
+	width: 250px;
+}
+
+#nav-items {
+	border-bottom: 1px dashed #d0d0d0;
+	margin: 0;
+	padding: 0;
+}
+
+#nav-items li {
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+}
+
+#nav-items a {
+	color: #8a8a8a;
+	display: block;
+	border-top: 1px dashed #d0d0d0;
+	letter-spacing: .05em;
+	padding: 10px 15px 10px 50px;
+	position: relative;
+	text-decoration: none;
+	text-transform: uppercase;
+	-webkit-transition: all .3s ease;
+}
+
+#nav-items a:hover {
+	color: #333;
+}
+
+#nav .blip-symbol {
+	background: #B70062;
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: absolute;
+	left: 15px;
+	top: 50%;
+	margin-top: -10px;
+}
+
+#nav .item-list {
+	display: none;
+	margin: 10px 0 20px 14px;
+	padding: 0;
+}
+
+#nav .item-list a {
+	border: none;
+	font-size: .9em;
+	padding: 3px 0;
+	text-transform: none;
+}
+
+.item-list .index {
+	float: left;
+	margin-right: 10px;
+	text-align: right;
+	width: 15px;
+}
+
+/*==================================
+	Chart
+------------------------------------*/
+
+#chart {
+	float: right;
+	height: 901px;
+	margin: 50px 0;
+	position: relative;
+	width: 901px;
+}
+
+/*==================================
+	Rings
+------------------------------------*/
+
+.ring {
+	background: transparent;
+	border: 1px solid #dadada;
+	border-radius: 900px;
+	display: block;
+	left: 50%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 50%;
+}
+
+/*==================================
+	Rings: Ring Label
+------------------------------------*/
+
+.ring-label {
+	color: #B0B0B0;
+	font-size: .8em;
+	font-weight: bold;
+	left: -5px;
+	margin: 3px 0 0 0;
+	position: relative;
+	text-transform: uppercase;
+	text-align: right;
+	top: 50%;
+	-webkit-font-smoothing: antialiased;
+}
+
+/*==================================
+	Quadrant
+------------------------------------*/
+
+.quadrant {
+	border: 1px solid #e0e0e0;
+	border-width: 1px 0 0 1px;
+	position: absolute;
+	height: 449px;
+	width: 449px;
+}
+
+.quadrant-label {
+	color: #5a5a5a;
+	font-size: 1.2em;
+	font-weight: bold;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	text-transform: uppercase;
+}
+
+/*==================================
+	Quadrant: Techniques
+------------------------------------*/
+
+#techniques {
+	left: 0;
+	top: 0;
+	-webkit-transform: rotate(-180deg);
+}
+
+#techniques .ring-label {
+	top: 0;
+	margin-top: 50%;
+	margin-left: 100%;
+	-webkit-transform: rotate(180deg);
+}
+
+#techniques .blip {
+	-webkit-transform: rotate(180deg);
+}
+
+#techniques .quadrant-label {
+	-webkit-transform: rotate(180deg);
+}
+
+/*==================================
+	Quadrant: Platforms
+------------------------------------*/
+
+#platforms {
+	bottom: 0;
+	left: 0;
+	-webkit-transform: rotate(90deg);
+}
+
+#platforms .blip {
+	-webkit-transform: rotate(-90deg);
+}
+
+#platforms .quadrant-label {
+	bottom: 28px;
+	right: -22px;
+	-webkit-transform: rotate(-90deg);
+}
+
+/*==================================
+	Quadrant: Tools
+------------------------------------*/
+
+#tools {
+	right: 0;
+	top: 0;
+	-webkit-transform: rotate(-90deg);
+}
+
+#tools .blip {
+	-webkit-transform: rotate(90deg);
+}
+
+#tools .quadrant-label {
+	bottom: 5px;
+	-webkit-transform: rotate(90deg);
+}
+
+/*==================================
+	Quadrant: Language
+------------------------------------*/
+#languages {
+	bottom: 0;
+	right: 0;
+	-webkit-transform: rotate(0);
+}
+
+#languages .blip {
+	-webkit-transform: rotate(0);
+}
+
+#languages .quadrant-label {
+	-webkit-transform: rotate(0deg);
+}
+
+/*==================================
+  Blips
+------------------------------------*/
+
+.blip {
+	background: #000;
+	border-radius: 3px;
+	color: #fff;
+	display: block;
+	font-size: .9em;
+	font-weight: bold;
+	height: 25px;
+	line-height: 25px;
+	list-style: none;
+	position: absolute;
+	text-align: center;
+	text-decoration: none;
+	width: 25px;
+	z-index: 1000;
+	-webkit-transition: none;
+}
+
+.blip:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.blip-tooltip {
+	color: #4a4a4a;
+	display: none;
+	font-size: .85em;
+	position: absolute;
+	bottom: -25px;
+	text-align: center;
+	line-height: 1.1;
+	left: 0;
+}
+
+/*==================================
+  Footer
+------------------------------------*/
+
+#footer {
+	border-top: 1px solid #dadada;
+	clear: both;
+	display: block;
+	margin: 100px auto;
+	padding: 30px 0;
+	text-align: center;
+	width: 100%;
+}
+
+#footer a {
+	color: #c0c0c0;
+	font-size: .85em;
+	text-decoration: none;
+}

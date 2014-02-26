@@ -1,0 +1,7 @@
+lib
+dist
+node_modules
+components
+.vagrant
+.DS_Store
+.sass-cache

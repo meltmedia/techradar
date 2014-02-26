@@ -1,0 +1,374 @@
+[
+    {
+        "name": "Techniques",
+        "color": "#8FA227",
+        "items": [
+            { 
+                "name": "Performance Testing",
+                "x": 25,
+                "y": 280
+            },
+            { 
+                "name": "Load Testing",
+                "x": 175,
+                "y": 245
+            },
+            { 
+                "name": "Integration Testing",
+                "x": 200,
+                "y": 165
+            },
+            { 
+                "name": "Self Executable App Containers",
+                "x": 160,
+                "y": 30
+            },
+            { 
+                "name": "Continuous Delivery",
+                "x": 100,
+                "y": 130
+            },
+            { 
+                "name": "Smoke Tests",
+                "x": 150,
+                "y": 100
+            },
+            { 
+                "name": "Moble Web Apps",
+                "x": 180,
+                "y": 70
+            },
+            { 
+                "name": "System Testing",
+                "x": 70,
+                "y": 70
+            },
+            { 
+                "name": "GitFlow",
+                "x": 40,
+                "y": 70
+
+            },
+            { 
+                "name": "Unit Testing",
+                "x": 15,
+                "y": 45
+            },
+            { 
+                "name": "TDD",
+                "x": 15,
+                "y": 110
+            },
+            { 
+                "name": "Responsive Design",
+                "x": 70,
+                "y": 15
+            },
+            { 
+                "name": "Continuous Integration",
+                "x": 80,
+                "y": 42
+            },
+            { 
+                "name": "Version Control Systems",
+                "x": 15,
+                "y": 15
+            },
+            { 
+                "name": "Health Checks",
+                "x": 110,
+                "y": 20
+            }
+        ]
+    
+    },
+    {
+
+        "name": "Platforms",
+        "color": "#DC6F1D",
+        "items" : [ 
+            { 
+                "name": "OSGi",
+                "x": 40,
+                "y": 400
+            },
+            { 
+                "name": "Sling",
+                "x": 285,
+                "y": 285
+            },
+            { 
+                "name": "JBoss",
+                "x": 365,
+                "y": 30
+            },
+            { 
+                "name": "Servicemix",
+                "x": 385,
+                "y": 120
+            },
+            { 
+                "name": "J2EE",
+                "x": 200,
+                "y": 320
+            },
+            { 
+                "name": "Dropwizard",
+                "x": 80,
+                "y": 295
+            },
+            { 
+                "name": "Drupal",
+                "x": 75,
+                "y": 250
+            },
+            { 
+                "name": "Statamic",
+                "x": 180,
+                "y": 185
+            },
+            { 
+                "name": "Grails",
+                "x": 155,
+                "y": 50
+            },
+            { 
+                "name": "Totem",
+                "x": 40,
+                "y": 155
+            },
+            { 
+                "name": "Angular.js",
+                "x": 110,
+                "y": 105
+            },
+            { 
+                "name": "Cadmium",
+                "x": 15,
+                "y": 95
+            },
+            { 
+                "name": "Amazon AWS",
+                "x": 40,
+                "y": 50
+            },
+            { 
+                "name": "Twitter Bootstrap",
+                "x": 70,
+                "y": 15
+            }
+        ]
+    },
+    {
+        "name": "Tools",
+        "color": "#587486",
+        "items" : [ 
+            { 
+                "name": "Ant",
+                "x": 265,
+                "y": 265
+            },
+            { 
+                "name": "Zookeeper",
+                "x": 360,
+                "y": 60
+            },
+            { 
+                "name": "ActiveMQ",
+                "x": 340,
+                "y": 185
+            },
+            { 
+                "name": "Less",
+                "x": 110,
+                "y": 370
+            },
+            { 
+                "name": "etcd",
+                "x": 90,
+                "y": 300
+            },
+            { 
+                "name": "leiningen",
+                "x": 200,
+                "y": 190
+            },
+            { 
+                "name": "Gradle",
+                "x": 285,
+                "y": 100
+            },
+            { 
+                "name": "RabbitMQ",
+                "x": 220,
+                "y": 220
+            },
+            { 
+                "name": "Collected",
+                "x": 195,
+                "y": 30
+            },
+            { 
+                "name": "statsd",
+                "x": 125,
+                "y": 155
+            },
+            { 
+                "name": "redis",
+                "x": 50,
+                "y": 195
+            },
+            { 
+                "name": "Docker",
+                "x": 35,
+                "y": 150
+            },
+            { 
+                "name": "Graphite",
+                "x": 150,
+                "y": 40
+            },
+            { 
+                "name": "MongoDB",
+                "x": 125,
+                "y": 90
+            },
+            { 
+                "name": "Sass",
+                "x": 105,
+                "y": 45
+            },
+            { 
+                "name": "Require.js",
+                "x": 15,
+                "y": 75
+            },
+            { 
+                "name": "Bower",
+                "x": 15,
+                "y": 110
+            },
+            { 
+                "name": "Grunt",
+                "x": 15,
+                "y": 45
+            },
+            { 
+                "name": "Maven",
+                "x": 50,
+                "y": 55
+            },
+            { 
+                "name": "Chef",
+                "x": 45,
+                "y": 105
+            },
+            { 
+                "name": "Vagrant",
+                "x": 45,
+                "y": 15
+            },
+            { 
+                "name": "GitHub",
+                "x": 15,
+                "y": 15
+            },
+            { 
+                "name": "nagios",
+                "x": 95,
+                "y": 15
+            },
+            { 
+                "name": "MySQL",
+                "x": 80,
+                "y": 75
+            }
+        ]
+    },
+    {
+        "name": "Languages",
+        "color": "#B70062",
+        "items" : [ 
+            { 
+                "name": "Flash",
+                "x": 130,
+                "y": 360
+            },
+            { 
+                "name": "Flex",
+                "x": 290,
+                "y": 290
+            },
+            { 
+                "name": "Dart",
+                "x": 345,
+                "y": 100
+            },
+            { 
+                "name": "Ruby",
+                "x": 125,
+                "y": 270
+            },
+            { 
+                "name": "Go",
+                "x": 180,
+                "y": 250
+            },
+            { 
+                "name": "Clojure",
+                "x": 300,
+                "y": 55
+            },
+            { 
+                "name": "SVG",
+                "x": 200,
+                "y": 40
+            },
+            { 
+                "name": "PHP",
+                "x": 55,
+                "y": 150
+            },
+            { 
+                "name": "Groovy",
+                "x": 155,
+                "y": 20
+            },
+            { 
+                "name": "Python",
+                "x": 135,
+                "y": 120
+            },
+            { 
+                "name": "HTML5",
+                "x": 15,
+                "y": 60
+            },
+            { 
+                "name": "Docpad",
+                "x": 70,
+                "y": 65
+            },
+            { 
+                "name": "JavaScript",
+                "x": 15,
+                "y": 90
+            },
+            { 
+                "name": "Node.js",
+                "x": 55,
+                "y": 15
+            },
+            { 
+                "name": "Java",
+                "x": 15,
+                "y": 15
+            },
+            { 
+                "name": "Objective C",
+                "x": 95,
+                "y": 15
+            }
+        ]
+    }
+]
