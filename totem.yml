@@ -1,5 +1,3 @@
-enabled: false
-
 variables:
   check_path: '/'
   docker_command: 'start'
