@@ -1,0 +1,13 @@
+enabled: false
+
+variables:
+  check_path: '/'
+  docker_command: 'start'
+  private_host:
+    value: |
+      # if ref == 'master'
+      techradar.au.melt.sh
+      # elif ref == 'develop'
+      techradar.cu.melt.sh
+      # endif
+  private_port: 8080
