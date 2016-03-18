@@ -15,7 +15,7 @@ deployers:
   __defaults__:
     proxy:
       hosts:
-        meltmedia:
+        meltmediaproxy:
           hostname:
             value: |
               # if ref == 'master'
@@ -27,6 +27,7 @@ deployers:
                 - internal
                 - this-cluster
               port: 8080
+              path: '/'
               force-ssl: false
               enabled: true
           enabled: true
