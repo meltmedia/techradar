@@ -10,3 +10,24 @@ variables:
       techradar.cu.melt.sh
       # endif
   private_port: 8080
+
+deployers:
+  __defaults__:
+    proxy:
+      hosts:
+        meltmedia:
+          hostname:
+            value: |
+              # if ref == 'master'
+              techradar.meltmedia.com
+              # endif
+          locations:
+            home:
+              allowed-acls:
+                - internal
+                - this-cluster
+              port: 8080
+              force-ssl: false
+              enabled: true
+          enabled:
+            value: true
