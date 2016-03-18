@@ -1,5 +1,3 @@
-enabled: false
-
 variables:
   check_path: '/'
   default_private_host_suffix: ''
