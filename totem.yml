@@ -29,5 +29,4 @@ deployers:
               port: 8080
               force-ssl: false
               enabled: true
-          enabled:
-            value: true
+          enabled: true
