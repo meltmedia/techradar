@@ -30,4 +30,5 @@ deployers:
               path: '/'
               force-ssl: false
               enabled: true
-          enabled: true
+          enabled:
+            value: true
