@@ -4,29 +4,9 @@ variables:
   private_host:
     value: |
       # if ref == 'master'
-      techradar.au.melt.sh
+      techradar.au.melt.sh,techradar.meltmedia.com
       # elif ref == 'develop'
       techradar.cu.melt.sh
       # endif
   private_port: 8080
 
-deployers:
-  __defaults__:
-    proxy:
-      hosts:
-        meltmediaproxy:
-          hostname:
-            value: |
-              # if ref == 'master'
-              techradar.meltmedia.com
-              # endif
-          locations:
-            home:
-              allowed-acls:
-                - internal
-                - this-cluster
-              port: 8080
-              path: '/'
-              force-ssl: false
-              enabled: true
-          enabled: true
