@@ -1,5 +1,5 @@
 variables:
-  check_path: '/'
+  # check_path: '/'
   default_private_host_suffix: ''
   docker_command: 'start'
   private_host:
