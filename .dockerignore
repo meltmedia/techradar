@@ -1,0 +1,7 @@
+*totem*
+.git*
+*.md
+Vagrantfile
+test
+Dockerfile
+.dockerignore
