@@ -1,6 +1,5 @@
 variables:
   default_private_host_suffix: ''
-  docker_command: 'start'
   private_host:
     value: |
       # if ref == 'master'
