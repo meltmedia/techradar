@@ -3,3 +3,5 @@
 *.md
 Vagrantfile
 test
+Dockerfile
+.dockerignore
