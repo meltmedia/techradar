@@ -13,5 +13,6 @@ RUN cd /var/www/tech-radar && grunt prepare
 EXPOSE 8080
 
 WORKDIR /var/www/tech-radar
-ENTRYPOINT static
+ENTRYPOINT ["static"]
 
+CMD ["-a", "0.0.0.0"]
