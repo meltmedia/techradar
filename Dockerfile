@@ -14,4 +14,4 @@ RUN cd /var/www/tech-radar && \
 EXPOSE 8080
 
 WORKDIR /var/www/tech-radar
-CMD ["static", "-a", "0.0.0.0"]
+CMD ["/usr/bin/static", "-a", "0.0.0.0"]
