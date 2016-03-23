@@ -1,0 +1,5 @@
+*totem*
+.git*
+*.md
+Vagrantfile
+test
