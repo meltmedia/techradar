@@ -1,5 +1,6 @@
 variables:
   default_private_host_suffix: ''
+  check_path: '/'
   private_host:
     value: |
       # if ref == 'master'
